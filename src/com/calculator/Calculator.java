@@ -1,28 +1,38 @@
-package com.company;
+package com.calculator;
 
 import java.util.Scanner;
 
 public class Calculator {
 
+
     public static void main(String[] args) {
+        startCalculator();
+    }
+
+    private static void startCalculator() {
         double firstNum;
+        double secondNum;
+        String operation;
         double result;
-	System.out.println("Choose a calculator operation by typing in the symbol: " +
-            "\n Addition (+) " +
-            "\n Subtraction (-) " +
-            "\n Multiplication (*) " +
-            "\n Division (/)");
+        Scanner scannerInput = new Scanner(System.in);
 
-	Scanner scannerInput = new Scanner(System.in);
-	String operation = scannerInput.nextLine();
+        //FirstNum
+        System.out.println("Type the first number ...");
+        firstNum = scannerInput.nextDouble();
 
-	System.out.println("Type the first number ...");
-	firstNum = scannerInput.nextDouble();
+        //Operation
+        System.out.println("Choose a calculator operation by typing in the symbol: " +
+                "\n Addition (+) " +
+                "\n Subtraction (-) " +
+                "\n Multiplication (*) " +
+                "\n Division (/)");
+        operation = scannerInput.next();
 
-	System.out.println("Type the second number ...");
-	Double secondNum = scannerInput.nextDouble();
+        //SecondNum
+        System.out.println("Type the second number ...");
+        secondNum = scannerInput.nextDouble();
 
-	switch (operation){
+        switch (operation) {
             case "+":
                 result = addition(firstNum, secondNum);
                 System.out.println(firstNum + " + " + secondNum + " = " + result);
@@ -39,9 +49,21 @@ public class Calculator {
                 result = division(firstNum, secondNum);
                 System.out.println(firstNum + " / " + secondNum + " = " + result);
                 break;
-        default:
-            System.out.println("Sorry, retry your choice!");
-            break;
+            default:
+                System.out.println("Sorry, retry your choice! " +
+                        "\n Your input was: " + operation);
+                break;
+        }
+        System.out.println("Do you like to start next Calculation? " +
+                "\n Type: Yes (Y) or No (No)");
+        String startAgain = scannerInput.next();
+        switch (startAgain) {
+            case ("Y"):
+                startCalculator();
+                break;
+            case ("N"):
+                System.out.println("Bye Bye!");
+                break;
         }
     }
 
@@ -50,7 +72,7 @@ public class Calculator {
         return result;
     }
 
-    private static Double multiplication(Double firstNum,  Double secondNum) {
+    private static Double multiplication(Double firstNum, Double secondNum) {
         Double result = firstNum * secondNum;
         return result;
     }
